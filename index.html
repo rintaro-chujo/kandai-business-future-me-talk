@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>商学会研究会 — 生成AIとともに「未来の自分」を語るアントレプレナーシップ教育の設計</title>
+  <meta name="deck-export-name" content="Kandai-Business-Future-Me-slides">
+  <!-- プレゼンツール本体（CSS/JS）は箱 github.com/rintaro-chujo/html-slides（v1.0.0）の deck/。
+     このフォルダには置かず、箱の tools/serve.py が deck/deck.css・deck/deck.js として配信する。 -->
+  <link rel="stylesheet" href="deck/deck.css">
+  <style>
+    /* この発表だけの上書き：アクセント色を USASBE 版デッキの緑に。class="r" は「強調色」として使う */
+    :root {
+      /* 日本語版は標準の5段階の文字サイズを使う */
+      --fs-h2: 54px; --fs-lead: 42px; --fs-body: 36px; --fs-small: 30px; --fs-cap: 26px;
+      --red: #3b7a1f;
+      --red-soft: #eaf3e3;
+      --green-dark: #2a4b17;
+    }
+    .slide.title { background: var(--green-dark); }
+    .slide.title h1 { top: 320px; font-size: 64px; line-height: 1.6; white-space: normal; }
+    .slide.title .subtitle { position: absolute; left: 90px; right: 90px; top: 470px; font-size: 48px; line-height: 1.5; color: #333; font-weight: 700; }
+    .slide.title .logos img.kansai { height: 84px; }
+    .slide.title .authors { grid-template-columns: 1fr; }
+    /* 引用元の小さな表記 */
+    .src { font-size: var(--fs-cap); color: var(--gray); font-weight: 500; white-space: nowrap; }
+    /* カード内の小見出し */
+    .card .k { font-size: var(--fs-cap); color: var(--gray); font-weight: 700; letter-spacing: .06em; text-transform: uppercase; margin-bottom: 6px; }
+    .card.hl { background: var(--red-soft); }
+    .card ul { margin-top: 6px; }
+    .scope-cards { align-items: stretch; }
+    .presentation-list { display:flex; flex-direction:column; gap:var(--gap-col); }
+    .presentation-citation { line-height:1.5; }
+    .presentation-citation a { color:var(--ink); text-decoration:none; }
+    .presentation-citation p + p { margin-top:var(--gap-block); }
+    .research-support { margin-top:var(--gap-col); }
+    table.t td.m { color: var(--red); font-weight: 700; white-space: nowrap; }
+    .demo-poster { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; }
+    .demo-label { position:absolute; left:90px; bottom:72px; z-index:1; padding:18px 28px; border-radius:12px; background:rgba(0,0,0,.72); color:#fff; font-size:var(--fs-body); font-weight:900; }
+    .slide.demo iframe { z-index:2; }
+    /* デモ動画（Google Drive 埋め込み）は PDF では描画されないので、印刷時は隠して下の文字を見せる */
+    .mode-print .slide iframe { display: none; }
+  </style>
+</head>
+
+<body>
+
+  <div id="deck">
+
+    <!-- ===================================================== タイトル -->
+    <section class="slide title" id="s-title" data-min="0.39">
+      <div class="card-t">
+        <div class="conf">商学会研究会</div>
+        <div class="logos"><img class="kansai" src="assets/logo-kansai.png" alt="関西大学"></div>
+        <h1>生成AIとともに「未来の自分」を語る<br>アントレプレナーシップ教育の設計</h1>
+        <div class="authors">
+          <div>
+            <div class="aff">関西大学</div>
+            <div class="names"><span>松井 克文</span></div>
+          </div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>皆さん、こんにちは。関西大学の松井克文です。今日は「生成AIとともに『未来の自分』を語るアントレプレナーシップ教育の設計」について発表します。</p>
+      </aside>
+    </section>
+<section class="slide" id="s-prior-presentations" data-min="0.5">
+  <h2>本研究に関する発表</h2>
+  <div class="body">
+    <div class="presentation-list">
+      <div class="presentation-citation">
+        <p><a href="https://researchmap.jp/k-matsui/presentations/52959179">Future-me, On Air: Personalized Podcast Role-Play for Entrepreneurial Mindsets</a></p>
+        <p class="small">Katsufumi Matsui, Rintaro Chujo, Takeshi Naemura<br>2026 Annual USASBE Conference · 2026年2月21日</p>
+      </div>
+      <div class="presentation-citation">
+        <p><a href="https://researchmap.jp/k-matsui/presentations/55281354">FUTURE-ME, ON AIR: SUPPORTING ENTREPRENEURIAL SELF-EFFICACY THROUGH PERSONALIZED GEN-AI PODCAST ROLE-PLAY</a></p>
+        <p class="small">Katsufumi Matsui, Rintaro Chujo, Takeshi Naemura<br>The 4th International Symposium on Entrepreneurship Education in Asia<br>2026年10月10日</p>
+      </div>
+    </div>
+    <p class="research-support">本研究はJSPS科研費 <span class="r">JP25K16727</span> の助成を受けたものです。</p>
+  </div>
+  <aside class="notes">
+    <p>本研究は、中條麟太郎さん、苗村健さんとの共同研究です。これまでに、2026年2月のUSASBE年次大会と、10月の第4回アジア・アントレプレナーシップ教育国際シンポジウムで発表しています。本日は、この研究をもとに教育の設計についてお話しします。</p>
+    <p>本研究はJSPS科研費JP25K16727の助成を受けています。</p>
+  </aside>
+</section>
+
+
+<section class="slide" id="s-entrepreneurship-scope" data-min="1.0">
+      <h2>アントレプレナーシップ教育とは</h2>
+      <div class="body">
+        <p>OECD：狭義と広義のアントレプレナーシップ教育 <span class="cap">(Lackéus, 2015)</span></p>
+        <div class="two scope-cards">
+          <div class="card hl">
+            <div class="k">狭義</div>
+            <p>ビジネスを創出する能力の獲得</p>
+          </div>
+          <div class="card hl">
+            <div class="k">広義</div>
+            <p>一般的な場面に応用できる<span class="r">個人の発達</span><br>すべての学生が対象</p>
+          </div>
+        </div>
+        <p>（アントレプレナーシップ教育とは）自ら社会課題を見つけ、課題解決に向かってチャレンジしたり、他者との協働により解決策を探求したりすることができる知識・能力・態度を身に付ける教育であり、起業家を育成するためだけのビジネス教育とは異なる。 <span class="cap">(文部科学省, 2024)</span></p>
+        <p>本研究は、<span class="r">双方のアントレプレナーシップ教育</span>を射程とする。</p>
+      </div>
+      <aside class="notes">
+        <p>最初に、ここでいうアントレプレナーシップ教育の範囲を確認します。OECDのLackéusによる整理では、ビジネスを創出する能力を育てる狭義の教育と、一般的な場面に応用できる個人の発達を目指す広義の教育が区別されています。広義の教育はすべての学生を対象とします。</p>
+        <p>文部科学省は、アントレプレナーシップ教育を「自ら社会課題を見つけ、課題解決に向かってチャレンジしたり、他者との協働により解決策を探求したりすることができる知識・能力・態度を身に付ける教育であり、起業家を育成するためだけのビジネス教育とは異なる」としています。本研究は、狭義と広義の双方のアントレプレナーシップ教育を射程とします。</p>
+        <p>【出典】文部科学省（2024）の年表記は添付された参照スライドに基づく。定義全文は2026年11月3日の本人指定。正式な資料名は要確認。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.9">
+      <h2>起業家の物語は、いたるところにある</h2>
+      <div class="body">
+        <div class="two">
+          <div class="figure"><img class="shot" src="assets/hibt-logo.png" alt="How I Built This (NPR)" style="height:520px;width:auto"></div>
+          <div class="figure"><img class="shot" src="assets/hibt-gebbia.png" alt="How I Built This Summit: Joe Gebbia, co-founder of Airbnb" style="height:420px;width:auto"></div>
+        </div>
+        <p class="foot"><span class="r">How I Built This</span>（NPR、約800エピソード）<br>起業家が挫折や迷いを語る</p>
+      </div>
+      <aside class="notes">
+        <p>こうしたアントレプレナーシップ教育では、狭義・広義を問わず、ゲスト講義や起業家の物語がよく用いられます。その代表例として、ご存じの方も多いと思うものから始めます。NPRのポッドキャスト「How I Built This」です。約800回にわたり、Airbnbのような有名企業の創業者が、挫折や迷い、そして一番苦しい時期をどう乗り越えたかを語っています。</p>
+        <p>こうした物語はいまや至るところにあり、私たちがゲスト講義やケーススタディ、起業家の講演という形で起業家教育の教室に持ち込んでいるのも、まさにこの種のストーリーです。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="1.03">
+      <h2>起業家の話を聞くだけで、自信は育つのか</h2>
+      <div class="body">
+        <p><span class="r">起業家ゲスト講義4回</span>を含む7週間の授業：受講群と統制群を比較 <span class="src">(Matsui et al., 2020)</span></p>
+        <ul>
+          <li><span class="r">起業家的自己効力感（ESE）</span>も起業意思も高まらなかった</li>
+          <li>受講前の起業意思が高い学生ほど、<span class="r">受講後に起業意思が低下した</span></li>
+        </ul>
+        <p>ゲスト講義中心の教育では、期待した効果は得られなかったと考えられる</p>
+        <p class="lead center" style="margin-top:var(--gap-col)">一方で、<span class="r">起業への適性を見つめ直す機会</span>になった可能性</p>
+        <p class="cap center">教育と起業意思の関連は小さく、教授法に左右される (Bae et al., 2014; Nabi et al., 2017)</p>
+      </div>
+      <aside class="notes">
+        <p>起業家の経験を聞くことで、学生の「自分にもできる」という自信は育つのでしょうか。私たちの先行研究では、起業家ゲスト講義4回を含む7週間の大学授業について、受講群と統制群を比較しました。</p>
+        <p>起業家的自己効力感と起業意思を高める効果は確認されませんでした。また、受講前の起業意思が高い学生ほど、受講後に起業意思が低下しました。この結果から、ゲスト講義中心の教育プログラムでは、期待した効果が得られなかったと考えられます。</p>
+        <p>一方で、起業意思の低下は、起業への向き不向きを考え直し、自分の適性を見つめ直した結果とも解釈できます。ここでは、起業意思が下がったことを、そのまま教育の失敗と捉えているわけではありません。</p>
+        <p>そのうえで本研究では、他者の経験を聞く機会に加えて、学生自身が試し、振り返る機会をどう設計するかを考えます。</p>
+        <p>【出典の扱い】結果と解釈は、2026年11月3日に提示されたMatsui et al.（2020）のアブストラクトに合わせた。受講前後の変化を、統制群との差に置き換えない。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.89">
+      <h2>自己効力感には、観察以外の源泉もある</h2>
+      <div class="body">
+        <div class="figure">
+          <svg viewBox="0 0 1700 630" width="1700" height="630" xmlns="http://www.w3.org/2000/svg"
+            style="font-family:var(--font);font-weight:700">
+            <defs>
+              <marker id="ah1" viewBox="0 0 12 12" markerUnits="userSpaceOnUse" markerWidth="24" markerHeight="24" refX="10" refY="6" orient="auto">
+                <path d="M0,0 L12,6 L0,12 z" fill="#111" />
+              </marker>
+            </defs>
+            <rect x="3" y="3" width="700" height="132" rx="16" fill="#fff" stroke="#3b7a1f" stroke-width="5" stroke-dasharray="16 10" />
+            <text x="353" y="60" text-anchor="middle" font-size="46" font-weight="900">遂行・達成経験</text>
+            <text x="353" y="110" text-anchor="middle" font-size="36" fill="#3b7a1f">「自分でできた」</text>
+
+            <rect x="3" y="168" width="700" height="132" rx="16" fill="#e6e6e6" stroke="#666" stroke-width="5" />
+            <text x="353" y="225" text-anchor="middle" font-size="46" font-weight="900">代理経験</text>
+            <text x="353" y="275" text-anchor="middle" font-size="36" fill="#555">「自分に近い人にもできた」</text>
+
+            <rect x="3" y="333" width="700" height="132" rx="16" fill="#fff" stroke="#3b7a1f" stroke-width="5" stroke-dasharray="16 10" />
+            <text x="353" y="390" text-anchor="middle" font-size="46" font-weight="900">社会的説得</text>
+            <text x="353" y="440" text-anchor="middle" font-size="36" fill="#3b7a1f">「励ましや評価を受けた」</text>
+
+            <rect x="3" y="498" width="700" height="129" rx="16" fill="#fff" stroke="#3b7a1f" stroke-width="5" stroke-dasharray="16 10" />
+            <text x="353" y="555" text-anchor="middle" font-size="46" font-weight="900">感情的な状態</text>
+            <text x="353" y="605" text-anchor="middle" font-size="36" fill="#3b7a1f">「なんとかなりそうだ」</text>
+
+            <line x1="703" y1="70" x2="955" y2="245" stroke="#111" stroke-width="4" marker-end="url(#ah1)" />
+            <line x1="703" y1="234" x2="955" y2="290" stroke="#111" stroke-width="4" marker-end="url(#ah1)" />
+            <line x1="703" y1="399" x2="955" y2="335" stroke="#111" stroke-width="4" marker-end="url(#ah1)" />
+            <line x1="703" y1="562" x2="955" y2="380" stroke="#111" stroke-width="4" marker-end="url(#ah1)" />
+
+            <rect x="965" y="225" width="400" height="180" rx="18" fill="#eaf3e3" stroke="#3b7a1f" stroke-width="5" />
+            <text x="1165" y="305" text-anchor="middle" font-size="44" font-weight="900" fill="#3b7a1f">起業家的</text>
+            <text x="1165" y="355" text-anchor="middle" font-size="44" font-weight="900" fill="#3b7a1f">自己効力感</text>
+            <line x1="1365" y1="315" x2="1440" y2="315" stroke="#111" stroke-width="5" marker-end="url(#ah1)" />
+            <rect x="1450" y="225" width="247" height="180" rx="18" fill="#fff" stroke="#111" stroke-width="5" />
+            <text x="1573" y="330" text-anchor="middle" font-size="42" font-weight="900">起業意思</text>
+
+            <rect x="965" y="500" width="52" height="36" rx="6" fill="#e6e6e6" stroke="#666" stroke-width="3" />
+            <text x="1035" y="530" font-size="36" fill="#333">ゲスト講義が主に与えるもの</text>
+            <rect x="965" y="570" width="52" height="36" rx="6" fill="#fff" stroke="#3b7a1f" stroke-width="3" stroke-dasharray="8 5" />
+            <text x="1035" y="600" font-size="36" fill="#3b7a1f">授業に加えたい経験</text>
+          </svg>
+        </div>
+        <p class="cap center">Bandura, 1997; Newman et al., 2019; Zhao et al., 2005; Taji et al., 2023</p>
+      </div>
+      <aside class="notes">
+        <p>この設計を考える手がかりが、自己効力感の研究です。自己効力感は主に4つの源泉、つまり遂行・達成経験、代理経験、社会的説得やフィードバック、そして感情的な状態から育ちます。そして起業家的自己効力感は、起業意思を支える重要なメカニズムであり、日本の大学生でもそれが確認されています。</p>
+        <p>起業家のゲスト講義が主に提供するのは、このうちの1つ、灰色で示した代理経験です。ゲスト講義に加えて提供したいのは、緑で示した3つの経験です。自分でやってみること、励ましやフィードバックを受けること、そして「なんとかなりそうだ」と感じることです。</p>
+        <p>【メモ】「ロールプレイはESEの確立した先行要因」とは言わない。ロールプレイは“既知の源泉を活性化するように設計できる”という言い方。</p>
+      </aside>
+    </section>
+
+<section class="slide s-emoji" data-min="0.37">
+      <div class="body">
+        <div class="emoji">🤔</div>
+        <p class="st">他人の物語を聞くだけでなく、<br><span class="r">自分自身の</span>起業家としての未来を<br>リハーサルできたら？</p>
+      </div>
+      <aside class="notes">
+        <p>そこで私たちは考えました。他人の起業ストーリーを聞くだけでなく、学生が「自分自身の」起業家としての未来をリハーサルできたらどうだろうか。学生が聴衆ではなく、主人公になれたらどうだろうか、と。</p>
+      </aside>
+    </section>
+
+<section class="slide s-emoji" data-min="0.49">
+      <div class="body">
+        <div class="emoji">💡</div>
+        <p class="st">学生自身の経験から生成AIが台本を書き、<br><span class="r">未来の自分</span>として<br>起業家ポッドキャストに出演する</p>
+      </div>
+      <aside class="notes">
+        <p>そこで考えたのがこれです。学生を「How I Built This」のような起業家ポッドキャストに出演させる。ただし聞き手ではなくゲストとして、未来の起業家としての自分自身を演じてもらう。そして、そのインタビューの台本を、生成AIが学生一人ひとりの過去の経験をもとに作ります。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.9">
+      <h2>「聞く」と「起業する」の間を埋める</h2>
+      <div class="body">
+        <div class="figure">
+          <svg viewBox="0 0 1680 500" width="1680" height="500" xmlns="http://www.w3.org/2000/svg"
+            style="font-family:var(--font);font-weight:700">
+            <defs>
+              <marker id="ah2" viewBox="0 0 12 12" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="22" refX="10" refY="6" orient="auto">
+                <path d="M0,0 L12,6 L0,12 z" fill="#9a9a9a" />
+              </marker>
+            </defs>
+            <rect x="10" y="20" width="500" height="300" rx="20" fill="#f4f4f4" stroke="#9a9a9a" stroke-width="4" />
+            <text x="260" y="90" text-anchor="middle" font-size="44" font-weight="900" fill="#666">聞く</text>
+            <text x="260" y="150" text-anchor="middle" font-size="30" fill="#333">ゲスト講義、起業家の物語</text>
+            <text x="260" y="250" text-anchor="middle" font-size="34" font-weight="900" fill="#666">「あの人はどう実現したか？」</text>
+
+            <rect x="590" y="10" width="500" height="330" rx="20" fill="#eaf3e3" stroke="#3b7a1f" stroke-width="6" />
+            <text x="840" y="80" text-anchor="middle" font-size="44" font-weight="900" fill="#3b7a1f">リハーサル</text>
+            <text x="840" y="140" text-anchor="middle" font-size="30" fill="#333">自分の未来の物語を演じ、</text>
+            <text x="840" y="180" text-anchor="middle" font-size="30" fill="#333">聞き直し、やり直す</text>
+            <text x="840" y="270" text-anchor="middle" font-size="36" font-weight="900" fill="#3b7a1f">「自分にできるか？」</text>
+
+            <rect x="1170" y="20" width="500" height="300" rx="20" fill="#fff" stroke="#111" stroke-width="4" />
+            <text x="1420" y="90" text-anchor="middle" font-size="44" font-weight="900">行動する</text>
+            <text x="1420" y="150" text-anchor="middle" font-size="30" fill="#333">実際のプロジェクトや起業</text>
+            <text x="1420" y="250" text-anchor="middle" font-size="34" font-weight="900">「実際にやっている」</text>
+
+            <line x1="60" y1="420" x2="1620" y2="420" stroke="#9a9a9a" stroke-width="5" marker-end="url(#ah2)" />
+            <text x="60" y="475" font-size="28" fill="#666">受動的・失敗のコストなし</text>
+            <text x="840" y="475" text-anchor="middle" font-size="28" fill="#3b7a1f" font-weight="900">失敗しても安全な実践</text>
+            <text x="1620" y="475" text-anchor="end" font-size="28" fill="#666">能動的・失敗のコスト大</text>
+          </svg>
+        </div>
+        <p class="cap center">行動ベースの教育は、自己効力感とその後の起業行動を高めた (Gielnik et al., 2015, RCT)<br>
+          振り返りを伴う、失敗しても安全な学習 <span class="src">(Pittaway &amp; Cope, 2007)</span></p>
+      </div>
+      <aside class="notes">
+        <p>ここにギャップがあります。一方には「聞く」があり、問いは「あの人はどう実現したか？」です。もう一方には実際に起業する「行動」があり、実践的ですがコストもリスクも高い。Gielnikらのランダム化研究のような行動ベースの教育は、実際にやることが自己効力感とその後の行動を高めることを示しています。</p>
+        <p>この2つの間に、練習の機会を設けたいと考えています。失敗しても安全なリハーサルの場です。学生が起業家的にふるまい、それを自分で聞き直し、もう一度やり直せる。問いが「あの人はどう実現したか？」から「自分にできるか？」に変わります。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.73">
+      <h2>自分の未来をリハーサルする3つの要素</h2>
+      <div class="body">
+        <div class="three center">
+          <div><p class="lead r">ポッドキャスト</p><p>「How I Built This」<br>という形式</p></div>
+          <div><p class="lead r">ロールプレイ</p><p>聞き手ではなく、<br>自分がゲストになる</p></div>
+          <div><p class="lead r">生成AI</p><p>自分の経験から<br>インタビュー台本を作る</p></div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>このアイデアには3つの要素があります。1つ目はポッドキャスト。「How I Built This」と同じ形式で、会話を録音し、聞き直すことができます。2つ目はロールプレイ。ただし今回スタジオのゲスト席に座るのは、有名な起業家ではなく学生自身です。演じることで、遂行・達成経験の手がかりが得られるよう設計しています。3つ目は生成AI。一人ひとりの経験をもとに、インタビュー台本を作ります。順に見ていきます。</p>
+        <p>【メモ】つかみ（How I Built This）→ 同じ形式で、ゲスト席に自分が座る → 台本は自分の経験から、の順。続くスライドは Podcast → Role-play → GenAI の順で、この3列に対応。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.76">
+      <h2>ポッドキャスト：自分の声を聞き、やり直す</h2>
+      <div class="body">
+        <div class="two n23">
+          <div class="figure"><img src="assets/podcast-icon.png" alt="Podcast" style="height:260px;width:auto"></div>
+          <ul>
+            <li><span class="r">話す</span>ことで、考えを言葉にする</li>
+            <li><span class="r">録音</span>して、話した内容を記録する</li>
+            <li><span class="r">聞き直す</span>ことで振り返り、もう一度試す</li>
+          </ul>
+        </div>
+        <p class="cap center" style="margin-top:var(--gap-col)">学生からは好意的に評価されているが、学習成果への効果はさらなる検証が必要 (Gunderson &amp; Cumming, 2022)</p>
+      </div>
+      <aside class="notes">
+        <p>ポッドキャストでは、考えを声に出し、その内容を録音して聞き直せます。本研究では、この特徴を生かして「演じる・聞く・振り返る・やり直す」という学習活動を設計します。</p>
+        <p>GundersonとCummingは、大学教育での音声ポッドキャスト利用を扱った17研究をレビューしています。学生からの好意的な評価は多い一方、学習成果への効果を裏づける研究はまだ限られ、さらなる検証が必要としています。「効果がない」という結論ではありません。</p>
+        <p>このレビューの結論と、本研究で録音や振り返りを重視する設計意図は区別します。Future-Me, On Airの学習効果は、今後の授業で検証します。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="1.05">
+      <h2>ロールプレイ：聞き手ではなく、ゲストになる</h2>
+      <div class="body">
+        <ul>
+          <li><span class="r">Edu-larp</span>：学習のために設計されたロールプレイ <span class="src">(Bowman, 2014)</span></li>
+          <li><span class="r">ブリード</span>：役の感情や考えが、演じる本人にも影響する <span class="src">(Montola, 2010; Bowman, 2013)</span></li>
+          <li>演じるのは有名な起業家ではなく、<span class="r">未来の自分自身</span></li>
+        </ul>
+      </div>
+      <aside class="notes">
+        <p>2つ目の要素はロールプレイです。役を演じて学ぶこと自体は新しくありません。学習のために設計されたライブ・アクション・ロールプレイ、edu-larp は、学校、ビジネス、医療などで使われています。</p>
+        <p>ラープの研究者は「ブリード」という現象を報告しています。役として感じたことが、演じる本人の考えや感情にも影響する現象です。本研究では、挫折を乗り越えた未来の自分を演じる経験が、「自分にもできるかもしれない」という感覚につながる可能性に着目しています。これは設計上の狙いで、まだ検証した結果ではありません。</p>
+        <p>そして演じる役は、学生自身の未来の姿です。学生はもはや「How I Built This」の聞き手ではなく、ゲストです。</p>
+        <p>【メモ】「ブリードでESEが上がる」とは言わない。ブリードは否定的に働くこともある（だから未来の自分は「信じられる姿」にし、3日目は振り返りで終える）。デンマークの学校は Østerskov Efterskole。共同研究チームのラープ運営経験に触れる場合は、松井氏本人の経験と混同しない。未来の自分に関する先行研究は次のスライド。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="1.01">
+      <h2>未来の自分を具体的に思い描き、演じる</h2>
+      <div class="body">
+        <ul>
+          <li>私たちは<span class="r">「可能自己」</span>をもつ <span class="src">(Markus &amp; Nurius, 1986)</span></li>
+          <li>未来の自分を鮮明に思い描くと、今の選択が変わる <span class="src">(Hershfield et al., 2011)</span></li>
+          <li>生成AIで作った未来の自分との対話により、<br>現在と未来の自分のつながりを、より強く感じるようになった <span class="src">(Pataranutaporn et al., 2024)</span></li>
+        </ul>
+        <p class="lead center" style="margin-top:var(--gap-col)">本研究では未来の自分に会うだけではない。<br>未来の自分<span class="r">として声に出して話す</span></p>
+      </div>
+      <aside class="notes">
+        <p>ここで、なぜ未来の自分を扱うのかを考えます。心理学ではこれを「可能自己」、つまり自分がなりうる姿のイメージと呼びます。未来の自分に関する研究は、それを鮮明にすると今の意思決定が変わることを示しています。Hershfieldらの研究では、年を取った自分の画像を見た人は、老後のための貯蓄により多くを配分しました。最近では、生成AIで作った未来の自分との会話が、未来の自分とのつながりの感覚を高めたと報告されています。</p>
+        <p>これらの研究では、人は未来の自分を「見る」か「話しかける」。Future-Me, On Air ではもう一歩進んで、学生がその未来の自分「として」、自分の声で話します。</p>
+        <p>【メモ】Hershfield (2011) は仮想の配分課題。Pataranutaporn et al. (2024) は不安低下と future self-continuity の上昇。起業家的自己効力感への効果ではないので混同しない。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.63">
+      <h2>生成AI：学生一人ひとりに合わせた台本を</h2>
+      <div class="body">
+        <ul>
+          <li>教員一人で、学生全員に異なる<br>ロールプレイ台本を用意するのは難しい</li>
+          <li>生成AIによって、<span class="r">学生一人ひとりに合わせた</span>シナリオを効率よく作れる <span class="src">(Winkler et al., 2023)</span></li>
+          <li>答えを出す機械ではなく、<span class="r">学びの足場</span>として使う</li>
+        </ul>
+      </div>
+      <aside class="notes">
+        <p>3つ目の要素は生成AIです。個別化したロールプレイ自体は新しくありませんが、教員一人で学生全員の台本を書くことはできません。生成AIを使えば、多くの学生に、それぞれの経験に合った台本を用意できます。Winklerらが述べるように、生成AIの可能性の一つは、学習者一人ひとりに固有の新しい学習経験を設計できる点にあります。私たちはAIを答えを出す機械ではなく、足場として使います。</p>
+        <p>【メモ】Xie &amp; Wang (2025) に触れる場合は「関連を報告（SEM、346人）」まで。「GenAIがESEを高めると確認された」とは言わない。</p>
+      </aside>
+    </section>
+
+<section class="slide s-statement" data-min="0.17">
+      <div class="body">
+        <p class="st">Future-Me, On Air</p>
+        <p style="margin-top:36px">パーソナライズされた生成AIポッドキャスト・ロールプレイによる<br>起業家的自己効力感の支援</p>
+      </div>
+      <aside class="notes">
+        <p>この3つを組み合わせて作ったのが、「Future-Me, On Air」です。</p>
+        <p>【メモ】話を切り替える扉。元スライド（USASBE）の提案の扉に対応。ここで一拍おく。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.71">
+      <h2>Future-Me, On Air</h2>
+      <div class="body">
+        <p class="lead"><span class="g">聴衆</span>から、<span class="r">自分自身の未来の主人公</span>へ</p>
+        <ol>
+          <li><span class="r">過去の経験</span>を振り返る</li>
+          <li>生成AIが<span class="r">未来の自分にインタビューする台本</span>を作る</li>
+          <li>ペアで<span class="r">演じ、録音し、聞き直す</span></li>
+        </ol>
+      </div>
+      <aside class="notes">
+        <p>「Future-Me, On Air」は、学習者を「聴衆」から「自分自身の未来の主人公」へと移す、パーソナライズされた体験型学習アプリです。</p>
+        <p>流れは3ステップです。学生が過去の経験を振り返り、生成AIがその経験をもとに、起業家の思考・行動様式を取り入れた「未来の自分へのインタビュー台本」を作ります。その台本を使って、ペアで演じ、録音し、聞き直します。</p>
+      </aside>
+    </section>
+
+<section class="slide demo" data-min="2.31" style="padding:0;background:#000">
+      <img class="demo-poster" src="assets/demo-thumbnail.jpg" alt="Future-Me, On Airの授業デモ動画の代表フレーム">
+      <div class="demo-label">▶ デモ動画（2分）</div>
+      <iframe src="https://drive.google.com/file/d/1SUFGloxH89zwk_PYGqYtXvsSMm6vnnPN/preview" title="Demo video"
+        style="position:absolute;inset:0;width:100%;height:100%;border:0" allow="autoplay; fullscreen" allowfullscreen></iframe>
+      <aside class="notes">
+        <p>実際の様子をお見せします。［2分のデモ動画を再生］ここでは、学生が過去の経験を短く話し、AIがインタビュー台本を生成し、ペアでポッドキャストを収録しています。</p>
+        <p>【メモ】動画は Google Drive の埋め込み（要ネット接続）。開いた直後に黒いままなら、ページを再読み込みすると出る（プレビューで一度そうなった）。再生ボタンをクリックするとキー操作が動画側に移るので、終わったらスライドの外側（黒い縁がなければ発表者ビュー）をクリックしてから → で進む。会場のネットが不安なら動画ファイルを assets/ に置いて &lt;video&gt; に差し替える。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.56">
+      <h2>3回の授業の全体像</h2>
+      <div class="body">
+        <div class="figure">
+          <svg viewBox="0 0 1700 508" width="1700" height="508" xmlns="http://www.w3.org/2000/svg"
+            style="font-family:var(--font);font-weight:700">
+            <g transform="translate(4,4)">
+              <polygon points="0,0 480,0 550,250 480,500 0,500" fill="#fff" stroke="#3b7a1f" stroke-width="6" stroke-linejoin="round" />
+              <text x="40" y="80" font-size="40" fill="#666">1日目</text>
+              <text x="40" y="152" font-size="64" font-weight="900">過去</text>
+              <text x="40" y="240" font-size="42" fill="#333">これまでの経験を</text>
+              <text x="40" y="302" font-size="42" fill="#333">自分の言葉で語り、</text>
+              <text x="40" y="364" font-size="42" fill="#333">生成AIが未来の</text>
+              <text x="40" y="426" font-size="42" fill="#333">シナリオに変える</text>
+            </g>
+            <g transform="translate(575,4)">
+              <polygon points="0,0 480,0 550,250 480,500 0,500" fill="#fff" stroke="#3b7a1f" stroke-width="6" stroke-linejoin="round" />
+              <text x="40" y="80" font-size="40" fill="#666">2日目</text>
+              <text x="40" y="152" font-size="64" font-weight="900">未来</text>
+              <text x="40" y="240" font-size="42" fill="#333">即興ポッドキャストで</text>
+              <text x="40" y="302" font-size="42" fill="#333">未来の自分を演じ、</text>
+              <text x="40" y="364" font-size="42" fill="#333">その会話を</text>
+              <text x="40" y="426" font-size="42" fill="#333">録音する</text>
+            </g>
+            <g transform="translate(1146,4)">
+              <polygon points="0,0 480,0 550,250 480,500 0,500" fill="#fff" stroke="#3b7a1f" stroke-width="6" stroke-linejoin="round" />
+              <text x="40" y="80" font-size="40" fill="#666">3日目</text>
+              <text x="40" y="152" font-size="64" font-weight="900">振り返り</text>
+              <text x="40" y="240" font-size="42" fill="#333">他のペアの収録を聞き、</text>
+              <text x="40" y="302" font-size="42" fill="#333">議論し、理論と実践を</text>
+              <text x="40" y="364" font-size="42" fill="#333">結びつける</text>
+            </g>
+          </svg>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>プログラムは3回の授業で構成されます。1日目「PAST」では、学生が自分の実際の経験を語り、生成AIがそれを未来の起業家シナリオに変換します。2日目「FUTURE」では、未来の自分を即興のポッドキャストで演じ、録音します。3日目「REFLECT」では、他のペアの収録を聞き、議論し、経験を理論と結びつけます。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.71">
+      <h2>1日目・過去：自分の経験を台本の素材にする</h2>
+      <div class="body">
+        <ol>
+          <li><span class="r">ミニ講義</span>（20分）<br>起業家の思考・行動様式（エフェクチュエーションなど）について</li>
+          <li><span class="r">個人で振り返る</span>（10分）<br>部活動、仕事、趣味など、自分の経験を思い出す</li>
+          <li><span class="r">ペア・インタビューと録音</span>（30分）<br>ガイドを使って互いにインタビューする</li>
+          <li><span class="r">提出とペアでの振り返り</span>（30分）<br>生成AIが本人の経験をもとに、未来の自分を演じる台本を作る</li>
+        </ol>
+      </div>
+      <aside class="notes">
+        <p>1日目は、起業家の思考・行動様式について、エフェクチュエーションなどを紹介する20分のミニ講義から始まります。次に学生は自分の経験を思い出します。ビジネスの経験である必要はなく、部活動、研究、アルバイト、趣味でも構いません。ペアでお互いにインタビューし、録音します。この録音から、生成AIが学生一人ひとりの未来の起業家インタビュー台本を作ります。ポイントは、素材が有名な起業家の物語ではなく、学生自身の物語だということです。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.36">
+      <h2>2日目・未来：未来の自分として出演する</h2>
+      <div class="body">
+        <ol>
+          <li><span class="r">台本の確認</span>（15分）<br>生成AIの台本を読み、自分用に直す</li>
+          <li><span class="r">ペアでリハーサル</span>（10分）<br>一度、役を演じてみる</li>
+          <li><span class="r">本番収録</span>（40分）<br>ホスト役と起業家役を交代し、即興で演じる</li>
+          <li><span class="r">編集</span>（25分）<br>聞き直し、不要な部分を切り、内容を明確にする</li>
+        </ol>
+      </div>
+      <aside class="notes">
+        <p>2日目は、まず台本を読んで自分用に直し、一度リハーサルをしてから、ホスト役と起業家役を交代しながら本番を収録します。台本はあくまで出発点で、即興が推奨されます。最後に聞き直して編集します。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.75">
+      <h2>大成功したCEOよりも、自分にもありうる未来の姿</h2>
+      <div class="body">
+        <p class="quote">「2030年。あなたは、自分の知識や人とのつながりをもとに、<br>小さなプロジェクトを始めました。<br>ホストは、<span class="r">当初の計画がうまくいかなくなった瞬間</span>について尋ねます」</p>
+        <p class="g center" style="margin-top:var(--gap-col)">インタビューの設定例</p>
+      </div>
+      <aside class="notes">
+        <p>ここで重要な設計上の選択があります。私たちは学生に「大成功したCEO」を演じさせません。手の届かない人物は、自分のこととして感じにくいからです。代わりに、自分にもありうると思える未来の姿を設定します。たとえば「2030年。あなたは、自分の知識や人とのつながりをもとに小さなプロジェクトを始めました。ホストが、当初の計画がうまくいかなくなった瞬間について尋ねます」。このように、身近な経験をもとに、起業家が不確実な状況でどう考え、行動するかを具体的に考えます。</p>
+        <p>【メモ】USASBE版では「2035年に成功した起業家」設定だった。今回は近未来・不確実性の中の自分に変更した点を強調してよい。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.58">
+      <h2>3日目・振り返り：自分と仲間の声を聞く</h2>
+      <div class="body">
+        <p><span class="r">授業前：</span>他の2〜3ペアのポッドキャストを聞く</p>
+        <ol>
+          <li><span class="r">振り返りを共有</span>（10分）<br>他のペアの収録で印象に残ったことを話す</li>
+          <li><span class="r">グループ・ディスカッション</span>（50分）<br>共通するパターンを見つけ、理論と実践を結ぶ</li>
+          <li><span class="r">個人で振り返る</span>（30分）<br>今の自分に何ができるか、次に何を試すか</li>
+        </ol>
+      </div>
+      <aside class="notes">
+        <p>3日目の前に、学生は他の2〜3ペアのポッドキャストを聞き、短い振り返りを書きます。授業では共通のパターンを話し合い、聞いた内容を、授業で学んだ起業家の思考・行動様式と結びつけます。仲間の収録を聞くことも代理経験ですが、それは自分に近い人からの代理経験です。最後に個人で「今の自分に何ができるか、次に何を試すか」を振り返ります。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.56">
+      <h2>期待する学習成果</h2>
+      <div class="body">
+        <ol>
+          <li><span class="r">起業家の行動様式の原則を見つけ、使う</span><br>未来の自分の行動と、起業家の行動様式の原則を結びつける</li>
+          <li><span class="r">起業家的自己効力感を育てる</span><br>未来の自分を演じ、行動する自信を得る</li>
+        </ol>
+      </div>
+      <aside class="notes">
+        <p>期待する学習成果は2つです。第一に、起業家の行動様式の原則を、自分自身の未来の起業ストーリーの中で見つけ、使えるようになること。第二に、起業家的自己効力感を高めることです。起業家、それも自分自身の未来の姿を演じることで、行動する自信を得て、起業家としての自己像を形づくることにつながると期待しています。</p>
+        <p>【メモ】元スライド（USASBE）の Expected Learning Outcomes に対応。「高まることを確認した」とは言わない（まだ効果データなし）。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="1.18">
+      <h2>考察1：ロールモデルから「暫定的な自己」へ</h2>
+      <div class="body">
+        <p>人は3つの段階で新しい役割に適応する <span class="src">(Ibarra, 1999)</span></p>
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:var(--gap-block) 64px;align-items:baseline;margin-top:var(--gap-block)">
+          <div class="r">1. ロールモデルを観察する</div><div>起業家の物語、ゲスト講義</div>
+          <div class="r">2. 暫定的な自己を試す</div><div>未来の自分を演じる</div>
+          <div class="r">3. フィードバックで評価する</div><div>聞き直し、仲間の反応</div>
+        </div>
+        <p class="lead center" style="margin-top:var(--gap-block)">ゲスト講義は主に、ロールモデルを観察する機会。<br>Future-Me は<span class="r">3段階すべて</span>を支えるよう設計</p>
+      </div>
+      <aside class="notes">
+        <p>ここから先行研究と結びつけて考察します。Ibarraの若手専門職研究を枠組みとして用いると、新しい役割への適応は3つの段階で捉えられます。ロールモデルを観察する。「暫定的な自己」、つまり自分がなりうる姿の試作版を試しに演じる。そしてその試行をフィードバックに照らして評価する。</p>
+        <p>この見方に立つと、起業家の物語やゲスト講義は、主にロールモデルを観察する機会にあたります。本研究では、そこに役を試し、振り返る機会を加えます。Future-Me, On Air は3段階すべてを支えるよう設計しています。ポッドキャストという形式がロールモデルを示し、ロールプレイで未来の自分を試し、録音を聞き直したり、仲間の反応を受けたりして、自分の演じ方を振り返ります。観察で終わらず、自分で試し、振り返るところまでを授業に組み込む提案です。</p>
+        <p>【メモ】Ibarra (1999) は投資銀行・コンサルの若手専門職の質的研究。学生の起業家教育で検証されたモデルではないので「〜という枠組みで見ると」と言う。“designed for” を守り、「3段階すべてを実現した」とは言わない。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="1.09">
+      <h2>考察2：生成AIを、思考と行動を促す触媒に</h2>
+      <div class="body">
+        <ul>
+          <li>制約のないGPT-4チューターを使った生徒は練習では好成績だったが、<br>AIなしで解く試験では<span class="r">対照群より成績が低かった</span> <span class="src">(Bastani et al., 2025)</span></li>
+          <li>AIのアイデアで書いた物語は、互いに<span class="r">似通っていた</span> <span class="src">(Doshi &amp; Hauser, 2024)</span></li>
+        </ul>
+        <p>AIの出力を、人間同士の批評的な議論を促す<span class="r">触媒</span>として使う<br><span class="src">（中條 et al., 2025）</span></p>
+        <p class="lead center" style="margin-top:var(--gap-col)">AIが<span class="r">本人の経験</span>から台本を下書きし、<br><span class="r">学生自身</span>が修正し、演じ、振り返る</p>
+      </div>
+      <aside class="notes">
+        <p>生成AIを、学生自身の思考や行動を促す触媒として使います。高校数学の研究では、AI使用時の練習で好成績でも、AIなしの試験では対照群より成績が低かった例が報告されています。また、創作の研究では、AIのアイデアを使った物語が互いに似通っていたと報告されています。</p>
+        <p>中條らは、LLM同士の対話を参加者が共同で批評するワークショップを設計しました。インタビューから、AIの出力を共に批評することが、人間同士の議論を促す可能性が示唆されています。</p>
+        <p>本研究では、AIが本人の経験から台本の下書きを作り、学生自身が修正し、即興で演じ、録音を聞いて振り返ります。AIの出力をたたき台にして、その後の思考と行動を促す設計です。これらの先行研究とは活動が異なるため、本研究での効果は今後検証します。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.91">
+      <h2>考察3：録音を、自分の実演を振り返る手がかりに</h2>
+      <div class="body">
+        <ul>
+          <li><span class="r">セルフ・モデリング</span>：自分がうまく取り組む姿を見ることで、<br>パフォーマンスが向上しうる <span class="src">(Dowrick, 1999)</span></li>
+          <li>ポッドキャストの学習成果への効果は、さらなる検証が必要 <span class="src">(Gunderson &amp; Cumming, 2022)</span></li>
+        </ul>
+        <p class="lead center" style="margin-top:var(--gap-col)">録音した<span class="r">自分の実演</span>を聞き直し、<br>次にどう演じるかを考える</p>
+        <p>今後の展開：AIによる台本や音声への介入で、<br><span class="r">「自分がうまくできる姿」を構成する</span>可能性を探る</p>
+      </div>
+      <aside class="notes">
+        <p>第三に、録音を「自分にもできる」という感覚につなげることです。セルフ・モデリングの研究では、自分がうまく取り組む姿を見ることが、パフォーマンスの向上につながる可能性が示されています。主に動画を使った研究であり、音声や起業家教育での効果は今後確かめる必要があります。</p>
+        <p>本研究では、未来の自分を演じた録音を聞き直し、次の実演で試したいことを考えます。さらに、AIで台本や音声に介入し、「自分がうまくできる姿」を意図的に構成することも考えられます。たとえば、難しい状況への対処を語る台本を調整したり、音声を編集したりする可能性です。</p>
+        <p>これは、AIを使って自己像を設計するという今後の展開です。実際の行動の記録と、AIで構成した姿を区別したうえで、それが自信や次の行動につながるかを検証します。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.65">
+      <h2>Future-Me の仮説モデル</h2>
+      <div class="body">
+        <div class="figure">
+          <svg viewBox="0 0 1680 520" width="1680" height="520" xmlns="http://www.w3.org/2000/svg"
+            style="font-family:var(--font);font-weight:700">
+            <defs>
+              <marker id="ah3" viewBox="0 0 12 12" markerUnits="userSpaceOnUse" markerWidth="22" markerHeight="22" refX="10" refY="6" orient="auto">
+                <path d="M0,0 L12,6 L0,12 z" fill="#111" />
+              </marker>
+            </defs>
+            <g font-size="28">
+              <rect x="10" y="10" width="560" height="100" rx="14" fill="#fff" stroke="#111" stroke-width="4" />
+              <text x="290" y="72" text-anchor="middle">個別化 → 自分との関連性</text>
+              <rect x="10" y="140" width="560" height="100" rx="14" fill="#fff" stroke="#111" stroke-width="4" />
+              <text x="290" y="202" text-anchor="middle">演じる → 達成経験の証拠</text>
+              <rect x="10" y="270" width="560" height="100" rx="14" fill="#fff" stroke="#111" stroke-width="4" />
+              <text x="290" y="332" text-anchor="middle">仲間／AIの反応 → 社会的説得</text>
+              <rect x="10" y="400" width="560" height="100" rx="14" fill="#fff" stroke="#111" stroke-width="4" />
+              <text x="290" y="462" text-anchor="middle">聞き直し／再収録 → 変化の観察</text>
+            </g>
+            <line x1="570" y1="60" x2="760" y2="205" stroke="#111" stroke-width="4" marker-end="url(#ah3)" />
+            <line x1="570" y1="190" x2="760" y2="240" stroke="#111" stroke-width="4" marker-end="url(#ah3)" />
+            <line x1="570" y1="320" x2="760" y2="275" stroke="#111" stroke-width="4" marker-end="url(#ah3)" />
+            <line x1="570" y1="450" x2="760" y2="305" stroke="#111" stroke-width="4" marker-end="url(#ah3)" />
+            <rect x="770" y="190" width="260" height="130" rx="18" fill="#eaf3e3" stroke="#3b7a1f" stroke-width="5" />
+            <text x="900" y="250" text-anchor="middle" font-size="34" font-weight="900" fill="#3b7a1f">起業家的</text>
+            <text x="900" y="292" text-anchor="middle" font-size="34" font-weight="900" fill="#3b7a1f">自己効力感</text>
+            <line x1="1030" y1="255" x2="1120" y2="255" stroke="#111" stroke-width="5" marker-end="url(#ah3)" />
+            <rect x="1130" y="190" width="240" height="130" rx="18" fill="#fff" stroke="#111" stroke-width="5" />
+            <text x="1250" y="270" text-anchor="middle" font-size="36" font-weight="900">起業意思</text>
+            <line x1="1370" y1="255" x2="1440" y2="255" stroke="#111" stroke-width="5" marker-end="url(#ah3)" />
+            <rect x="1450" y="190" width="220" height="130" rx="18" fill="#fff" stroke="#111" stroke-width="5" />
+            <text x="1560" y="248" text-anchor="middle" font-size="32" font-weight="900">小さな</text>
+            <text x="1560" y="290" text-anchor="middle" font-size="32" font-weight="900">行動</text>
+          </svg>
+        </div>
+        <p class="cap center">起業家的自己効力感は、学習／経験から起業意思への効果を媒介する (Zhao et al., 2005). 生成AIを用いた起業家教育・自己効力感・起業意思には、
+          横断的SEMで正の関連がある (Xie &amp; Wang, 2025, n = 346)——因果効果の検証ではない</p>
+      </div>
+      <aside class="notes">
+        <p>これらをまとめると、次の仮説モデルになります。各設計要素が自己効力感の異なる源泉を活性化し、ESEが起業意思を支え、それが小さな行動につながると想定しています。Zhaoらは学習から意思への経路をESEが媒介することを示しました。Xie &amp; Wangは生成AIを用いた起業家教育との正の関連を報告していますが、これは横断的なSEMであり、ランダム化介入ではありません。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.67">
+      <h2>今後：授業での実証を通じて教育を改善する</h2>
+      <div class="body">
+        <ol>
+          <li>来年度、<span class="r">複数の大学の授業で実証</span>を行う予定</li>
+          <li>まずは、<span class="r">デザインの改善</span>に取り組む<br>授業での実施と学生の振り返りをもとに、活動や支援を見直す</li>
+          <li>その後、<span class="r">プレ・ポスト評価</span>を行う<br>比較条件も設けながら、各設計要素の効果を段階的に切り分ける</li>
+        </ol>
+        <p class="lead">効果検証とデザインの改善を重ね、<br><span class="r">よりよい教育を作っていく</span></p>
+      </div>
+      <aside class="notes">
+        <p>来年度は、複数の大学の授業で実証を行う予定です。まずはデザインを改善するために実施し、授業の中で活動がどのように進むか、学生がどこで戸惑うか、どのように振り返るかを捉えます。それをもとに、台本や活動の進め方、学生への支援を見直します。</p>
+        <p>その後、改善したデザインについてプレ・ポスト評価を行い、受講前後の起業家的自己効力感などの変化を捉えます。さらに、比較条件を設けて、台本の個別化や演じることなど、各設計要素の効果を段階的に切り分けていきます。次のスライドは、その比較計画の一案です。</p>
+        <p>効果があるかを確かめるだけでなく、検証から得た知見をデザインの改善につなげます。効果検証と改善を重ねながら、よりよい教育を作っていくことを目指します。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-min="0.5">
+      <h2>台本の個別化と、演じることの効果を検証する</h2>
+      <div class="body">
+        <table class="t">
+          <tr><th></th><th>ロールプレイ（演じる）</th><th>読み、振り返る</th></tr>
+          <tr><td><b>個別化した台本</b></td><td class="m">Future-Me 完全版</td><td>台本のみ</td></tr>
+          <tr><td><b>一般的な起業家の台本</b></td><td>一般的なロールプレイ</td><td>起業家の物語</td></tr>
+        </table>
+        <p class="foot">十分なサンプルが得られた場合、2×2計画で効果を切り分ける<br><span class="r">「自分の物語」</span>と<span
+            class="r">「自分で演じること」</span>が、それぞれ自己効力感にどう影響するかを検証する</p>
+      </div>
+      <aside class="notes">
+        <p>デザインの改善とプレ・ポスト評価を踏まえ、さらに、どの要素が効いているのかを確かめます。十分なサンプルが得られれば、パーソナライズの有無と演じるかどうかを掛け合わせた2×2の計画を予定しています。これにより「自分の物語であること」と「自分で演じること」が、それぞれ自己効力感にどう影響するかを確かめます。</p>
+      </aside>
+    </section>
+
+
+
+<section class="slide" data-min="0.73">
+      <h2>まとめ</h2>
+      <div class="body">
+        <div style="display:grid;grid-template-columns:auto 1fr;gap:var(--gap-col) 72px;align-items:baseline">
+          <div class="r">背景</div><div>起業家の物語は教室のいたるところにある</div>
+          <div class="r">問題</div><div>聞くだけで「自分にもできる」という自信が育つとは限らない</div>
+          <div class="r">提案</div><div>生成AIポッドキャスト・ロールプレイで自分の未来をリハーサルする</div>
+          <div class="r">展望</div><div>効果検証とデザインの改善を重ね、よりよい教育を作る</div>
+        </div>
+      </div>
+      <aside class="notes">
+        <p>まとめます。起業家の物語は起業家教育のいたるところにありますが、聞くだけでは「自分にもできる」という信念は育たないかもしれません。</p>
+        <p>Future-Me, On Air は、生成AIが本人の経験からパーソナライズしたポッドキャスト・ロールプレイで、学生が自分自身の起業家としての未来をリハーサルできるようにします。来年度は複数の大学の授業で実証を行い、まずデザインの改善に取り組み、その後プレ・ポスト評価と段階的な効果の切り分けを進めます。</p>
+        <p>効果検証とデザインの改善を重ねながら、よりよい教育を作っていきます。</p>
+
+      </aside>
+    </section>
+
+<section class="slide title" id="s-title-end" data-min="0.27">
+      <div class="card-t">
+        <div class="conf">商学会研究会</div>
+        <div class="logos"><img class="kansai" src="assets/logo-kansai.png" alt="関西大学"></div>
+        <h1>生成AIとともに「未来の自分」を語る<br>アントレプレナーシップ教育の設計</h1>
+        <div class="authors">
+          <div>
+            <div class="aff">関西大学</div>
+            <div class="names"><span>松井 克文</span></div>
+          </div>
+        </div>
+        <div class="ack">本研究はJSPS科研費 JP25K16727 の助成を受けたものです。</div>
+      </div>
+      <aside class="notes">
+        <p>ありがとうございました。ご質問・ご意見をお願いします。特に起業家教育の授業を担当されている方からのご意見をいただけると嬉しいです。</p>
+      </aside>
+    </section>
+
+<section class="slide s-divider" data-backup="1">
+      <div class="body">
+        <p class="lab">予備</p>
+        <p class="st">質疑応答用スライド</p>
+      </div>
+      <aside class="notes">
+        <p>質疑応答用の予備スライドです。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-backup="1">
+      <h2>参考文献（1/4）</h2>
+      <div class="body top">
+        <ul class="cap" style="color:#333;line-height:1.45">
+          <li>Bae, T. J., Qian, S., Miao, C., &amp; Fiet, J. O. (2014). Entrepreneurship Theory and Practice, 38(2).</li>
+          <li>Bandura, A. (1997). Self-efficacy: The exercise of control. Freeman.</li>
+          <li>Bastani, H., Bastani, O., Sungu, A., Ge, H., Kabakcı, Ö., &amp; Mariman, R. (2025). Generative AI without guardrails can harm learning: Evidence from high school mathematics. PNAS, 122, e2422633122.</li>
+          <li>Bowman, S. L. (2013). Social conflict in role-playing communities: An exploratory qualitative study. International Journal of Role-Playing, 4, 4–25.</li>
+          <li>Bowman, S. L. (2014). Educational live action role-playing games: A secondary literature review. In S. L. Bowman (Ed.), The Wyrd Con Companion Book 2014 (pp. 112–131). Wyrd Con.</li>
+          <li>Doshi, A. R., &amp; Hauser, O. P. (2024). Generative AI enhances individual creativity but reduces the collective diversity of novel content. Science Advances, 10(28), eadn5290.</li>
+          <li>Dowrick, P. W. (1999). A review of self modeling and related interventions. Applied and Preventive Psychology, 8, 23–39.</li>
+        </ul>
+      </div>
+      <aside class="notes">
+        <p>参考文献一覧です。</p>
+        <p>【メモ】Liñán &amp; Chen、McGee et al.、Pittaway &amp; Cope、Sarasvathy の巻号は一般的な書誌情報から補ったので、提出前に確認。Matsui et al. (2020) の英語誌名表記も要確認。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-backup="1">
+      <h2>参考文献（2/4）</h2>
+      <div class="body top">
+        <ul class="cap" style="color:#333;line-height:1.45">
+          <li>Gielnik, M. M., Frese, M., Kahara-Kawuki, A., et al. (2015). Academy of Management Learning &amp; Education, 14(1), 69–94.</li>
+          <li>Gunderson, J. L., &amp; Cumming, T. M. (2022, online). Podcasting in higher education as a component of Universal Design for Learning: A systematic review of the literature. Innovations in Education and Teaching International. https://doi.org/10.1080/14703297.2022.2075430</li>
+          <li>Hershfield, H. E., Goldstein, D. G., Sharpe, W. F., et al. (2011). Journal of Marketing Research, 48(SPL), S23–S37.</li>
+          <li>Ibarra, H. (1999). Provisional selves: Experimenting with image and identity in professional adaptation. Administrative Science Quarterly, 44(4), 764–791.</li>
+          <li>Lackéus, M. (2015). Entrepreneurship in Education: What, Why, When, How. OECD Local Economic and Employment Development Papers. https://doi.org/10.1787/cccac96a-en</li>
+          <li>Liñán, F., &amp; Chen, Y.-W. (2009). Entrepreneurship Theory and Practice, 33(3).</li>
+          <li>Markus, H., &amp; Nurius, P. (1986). Possible selves. American Psychologist, 41(9), 954–969.</li>
+          <li>Matsui, K., Makino, E., Umada, T., et al. (2020). Venture Review (Japan Academic Society of Ventures and Entrepreneurs), 36, 29–43.</li>
+        </ul>
+      </div>
+      <aside class="notes">
+        <p>参考文献一覧（続き）です。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-backup="1">
+      <h2>参考文献（3/4）</h2>
+      <div class="body top">
+        <ul class="cap" style="color:#333;line-height:1.45">
+          <li>McGee, J. E., Peterson, M., Mueller, S. L., &amp; Sequeira, J. M. (2009). Entrepreneurship Theory and Practice, 33(4).</li>
+          <li>Montola, M. (2010). The positive negative experience in extreme role-playing. Proceedings of DiGRA Nordic 2010.</li>
+          <li>Nabi, G., Liñán, F., Fayolle, A., Krueger, N., &amp; Walmsley, A. (2017). Academy of Management Learning &amp; Education, 16(2), 277–299.</li>
+          <li>Newman, A., Obschonka, M., Schwarz, S., Cohen, M., &amp; Nielsen, I. (2019). Journal of Vocational Behavior, 110, 403–419.</li>
+          <li>Pataranutaporn, P., Winson, K., Yin, P., et al. (2024). Future You: A conversation with an AI-generated future self reduces anxiety, negative emotions, and increases future self-continuity. IEEE Frontiers in Education Conference (FIE 2024).</li>
+          <li>Pittaway, L., &amp; Cope, J. (2007). Management Learning, 38(2).</li>
+          <li>Sarasvathy, S. D. (2001). Academy of Management Review, 26(2).</li>
+        </ul>
+      </div>
+      <aside class="notes">
+        <p>参考文献一覧（続き）です。</p>
+      </aside>
+    </section>
+
+<section class="slide" data-backup="1">
+      <h2>参考文献（4/4）</h2>
+      <div class="body top">
+        <ul class="cap" style="color:#333;line-height:1.45">
+          <li>Taji, N., Fujimura, M., &amp; Tamai, Y. (2023). Organizational Science, 56(4), 81–94.</li>
+          <li>Winkler, C., Hammoda, B., Noyes, E., &amp; van Gelderen, M. (2023). Entrepreneurship Education and Pedagogy, 6(4), 579–589.</li>
+          <li>Xie, Y., &amp; Wang, S. (2025). Scientific Reports, 15, 24079.</li>
+          <li>Zhao, H., Seibert, S. E., &amp; Hills, G. E. (2005). Journal of Applied Psychology, 90(6), 1265–1272.</li>
+          <li>中條 麟太郎・松井 克文・杉山 昂平・苗村 健 (2025). アイディエーションにおける批評的な議論を促すためのLLM同士の対話を触媒としたワークショップの設計. インタラクション2025, 3B21. https://www.interaction-ipsj.org/proceedings/2025/data/pdf/3B-21.pdf</li>
+        </ul>
+      </div>
+      <aside class="notes">
+        <p>参考文献一覧（続き）です。</p>
+      </aside>
+    </section>
+
+  </div>
+
+  <script src="deck/deck.js"></script>
+</body>
+
+</html>
